@@ -6,6 +6,7 @@ import os
 import re
 import affine
 import xarray as xr
+import rioxarray
 import pandas as pd
 from scipy.ndimage.interpolation import map_coordinates
 
@@ -471,7 +472,7 @@ def open_beam_dimap(path, read_data=True, as_complex=True):
             # we don't want to open the ENVI .hdr file...
             im_path = os.path.splitext(rpath)[0] + '.img'
             name = os.path.splitext(os.path.split(im_path)[1])[0]
-            ds[name] = xr.open_rasterio(im_path)
+            ds[name] = rioxarray.open_rasterio(im_path)
 
         # All attributes that are the same for each band
         # should be attributes of the dataset instead.
